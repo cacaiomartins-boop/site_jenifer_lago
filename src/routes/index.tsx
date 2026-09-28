@@ -105,7 +105,7 @@ function Home() {
         <div className="portrait-wrap reveal"><img className="portrait" loading="lazy" src={site.portrait} alt="Retrato de Jennifer Lago sentada no consultório"/><img className="portrait-inset" loading="lazy" src={site.reading} alt="Jennifer Lago sorrindo com um livro de Freud"/><div className="portrait-caption"><strong>{site.name}</strong><span>{site.profession}</span></div></div>
         <div className="about-content reveal"><span className="section-label">02 — Sobre</span><h2 className="section-title">Sou <em>Jennifer.</em></h2>
           <p>Sou psicóloga e psicanalista. Atendo em consultório particular em Brasília e também online.</p>
-          <p>Sou formada em Psicologia pelo UniCEUB, fiz a formação em Psicanálise no Corpo Freudiano de Brasília e sigo estudando no mestrado em Psicologia.</p>
+          <p>Sou formada em Psicologia pelo UniCEUB, fiz a formação em Psicanálise no Corpo Freudiano de Brasília e concluí o Master em Psicologia.</p>
           <p>Atendo adultos em português, inglês e espanhol, inclusive brasileiros que moram no exterior.</p>
           <ul className="education">{site.education.map(item => <li key={item}>{item}</li>)}</ul>
           <div className="tags">{site.specialties.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div><Booking label="Agendar uma conversa" />
