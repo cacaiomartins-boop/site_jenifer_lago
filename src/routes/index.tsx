@@ -123,7 +123,7 @@ function Home() {
       </div></section>
 
       <section className="section steps dark-section" id="como-funciona"><div className="container"><span className="section-label reveal">04 — Como funciona</span><h2 className="section-title reveal">Do primeiro contato ao <em>acompanhamento.</em></h2><div className="steps-grid">{[
-        ["01", "Primeiro contato", "Escolha um horário disponível pelo perfil no Doctoralia."],
+        ["01", "Primeiro contato", "Agende uma consulta pelo whatsapp ou escolha um horário disponível pelo perfil no Doctoralia."],
         ["02", "Horário e formato", "Confira a disponibilidade para atendimento presencial ou online."],
         ["03", "Primeira consulta", "Conversamos sobre o que motiva sua procura e a frequência das sessões."],
         ["04", "Acompanhamento", "O processo segue no seu tempo, com possibilidade de rever a frequência."],

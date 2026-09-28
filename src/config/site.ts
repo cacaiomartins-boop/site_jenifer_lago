@@ -21,7 +21,7 @@ export const site = {
   education: [
     "Graduação em Psicologia pelo UniCEUB (2022)",
     "Formação básica em Psicanálise pelo Corpo Freudiano de Brasília (2024)",
-    "Mestrado em Psicologia pela Arden University (em andamento)",
+    "Mestrado em Psicologia pela Arden University (concluído)",
     "Autora de livro e capítulo sobre transtornos alimentares e tratamentos psicológicos com suporte empírico",
   ],
   specialties: ["Psicanálise", "Ansiedade", "Transtornos alimentares", "Relacionamentos", "Depressão"],
