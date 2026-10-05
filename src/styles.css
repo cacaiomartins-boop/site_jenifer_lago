@@ -305,7 +305,7 @@ html.reveal-ready .reveal:not(.is-visible) { opacity: 0; transform: translateY(3
 .pub-fulltext { margin: 0 0 30px; padding: 28px 0 6px 28px; border-left: 2px solid var(--terracotta); max-width: 700px; animation: pub-open .55s cubic-bezier(.22, 1, .36, 1) both; }
 .pub-fulltext-meta { color: var(--moss); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 24px; }
 .pub-fulltext-body p { font-size: 16.5px; line-height: 1.8; color: var(--ink); margin: 0 0 18px; }
-.pub-fulltext-body p:first-child::first-letter { float: left; font: 300 4.2em/.78 var(--font-display); padding: 7px 12px 0 0; color: var(--rust); }
+.pub-fulltext-body > .pub-block:first-child > p:first-child::first-letter { float: left; font: 300 4.2em/.78 var(--font-display); padding: 7px 12px 0 0; color: var(--rust); }
 .pub-ref { font-size: .72em; font-weight: 600; color: var(--rust); line-height: 0; margin-left: 1px; }
 .pub-fulltext h3 { font: 400 24px/1.2 var(--font-display); margin: 34px 0 14px; padding-top: 24px; border-top: 1px solid var(--sand); }
 .pub-refs { margin: 0; padding-left: 22px; color: var(--moss); font-size: 13px; line-height: 1.7; }
@@ -314,3 +314,13 @@ html.reveal-ready .reveal:not(.is-visible) { opacity: 0; transform: translateY(3
 .pub-fulltext-close { margin-top: 22px; }
 @keyframes pub-open { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @media (max-width: 800px) { .pub-fulltext { padding-left: 18px; } .pub-fulltext-body p { font-size: 16px; } }
+/* Blocos de livros e capítulos */
+.pub-block + .pub-block { margin-top: 8px; }
+.pub-block h4 { font: 400 22px/1.25 var(--font-display); color: var(--forest); margin: 30px 0 10px; }
+.pub-block:first-child h4 { margin-top: 0; }
+.pub-fulltext-body .pub-block-note { color: var(--moss); font-size: 13px; font-style: italic; line-height: 1.55; margin: 0 0 16px; }
+.pub-points { list-style: none; margin: 0 0 18px; padding: 0; }
+.pub-points li { position: relative; padding: 9px 0 9px 24px; border-bottom: 1px solid var(--sand); font-size: 15.5px; line-height: 1.6; }
+.pub-points li::before { content: "—"; position: absolute; left: 0; color: var(--terracotta); }
+
+.work-panel-dark p { color: color-mix(in oklch, var(--paper) 74%, transparent); }

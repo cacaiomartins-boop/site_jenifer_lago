@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { BookOpen, ChevronUp, Download, ExternalLink } from "lucide-react";
-import { site } from "../config/site";
+import { site, type Publication } from "../config/site";
 import { SiteFooter, SiteHeader } from "../components/site-chrome";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -10,9 +10,9 @@ export const Route = createFileRoute("/publicacoes")({
   head: () => ({
     meta: [
       { title: "Publicações | Jennifer Lago, psicóloga e psicanalista" },
-      { name: "description", content: "Artigos e publicações de Jennifer Lago, psicóloga e psicanalista em Brasília. Luto, psicanálise e saúde mental." },
+      { name: "description", content: "Artigos, livros e capítulos de Jennifer Lago, psicóloga e psicanalista em Brasília. Luto, transtornos alimentares, preconceito e psicanálise." },
       { property: "og:title", content: "Publicações | Jennifer Lago" },
-      { property: "og:description", content: "Artigos e publicações de Jennifer Lago, psicóloga e psicanalista CRP 01/26397." },
+      { property: "og:description", content: "Artigos, livros e capítulos de Jennifer Lago, psicóloga e psicanalista CRP 01/26397." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -24,13 +24,13 @@ function WithRefs({ text }: { text: string }) {
   return <>{text.split(/(\(\d+(?:[-,]\d+)*\))/g).map((part, index) => /^\(\d/.test(part) ? <sup className="pub-ref" key={index}>{part.slice(1, -1)}</sup> : part)}</>;
 }
 
-type Publication = (typeof site.publications)[number];
-
 function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
   const [open, setOpen] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
-  const textId = `artigo-${index + 1}`;
-  const minutes = Math.max(1, Math.round(pub.body.join(" ").split(/\s+/).length / 200));
+  const textId = `publicacao-${index + 1}`;
+  const blocks = pub.sections ?? (pub.body ? [{ paragraphs: pub.body }] : []);
+  const words = blocks.flatMap(block => [...(block.paragraphs ?? []), ...(block.list ?? [])]).join(" ").split(/\s+/).length;
+  const readMeta = pub.readMeta ?? `Texto completo · leitura de cerca de ${Math.max(1, Math.round(words / 200))} min`;
 
   const collapse = () => {
     setOpen(false);
@@ -47,19 +47,28 @@ function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
         <p className="pub-summary">{pub.summary}</p>
         <div className="pub-actions">
           <button type="button" className="btn btn-dark" aria-expanded={open} aria-controls={textId} onClick={() => (open ? collapse() : setOpen(true))}>
-            {open ? "Recolher artigo" : "Ler artigo completo"}{open ? <ChevronUp size={16} strokeWidth={1.5} /> : <BookOpen size={16} strokeWidth={1.5} />}
+            {open ? "Recolher" : pub.readLabel}{open ? <ChevronUp size={16} strokeWidth={1.5} /> : <BookOpen size={16} strokeWidth={1.5} />}
           </button>
-          <a className="btn btn-outline" href={pub.url} {...external}>Ver na revista <ExternalLink size={15} strokeWidth={1.5} /></a>
+          <a className="btn btn-outline" href={pub.url} {...external}>{pub.linkLabel} <ExternalLink size={15} strokeWidth={1.5} /></a>
           {pub.pdf ? <a className="btn btn-outline" href={pub.pdf} {...external}>Baixar PDF <Download size={16} strokeWidth={1.5} /></a> : null}
         </div>
 
         {open ? (
           <div className="pub-fulltext" id={textId}>
-            <p className="pub-fulltext-meta">Texto completo · leitura de cerca de {minutes} min</p>
-            <div className="pub-fulltext-body">{pub.body.map(paragraph => <p key={paragraph.slice(0, 40)}><WithRefs text={paragraph} /></p>)}</div>
-            <h3>Referências</h3>
-            <ol className="pub-refs">{pub.references.map(ref => <li key={ref.text}>{ref.text}{ref.url ? <> <a href={ref.url} {...external}>{ref.url}</a></> : null}</li>)}</ol>
-            <button type="button" className="btn btn-outline pub-fulltext-close" onClick={collapse}>Recolher artigo <ChevronUp size={16} strokeWidth={1.5} /></button>
+            <p className="pub-fulltext-meta">{readMeta}</p>
+            <div className="pub-fulltext-body">{blocks.map((block, i) => (
+              <div className="pub-block" key={i}>
+                {"heading" in block && block.heading ? <h4>{block.heading}</h4> : null}
+                {"note" in block && block.note ? <p className="pub-block-note">{block.note}</p> : null}
+                {block.paragraphs?.map(paragraph => <p key={paragraph.slice(0, 40)}><WithRefs text={paragraph} /></p>)}
+                {"list" in block && block.list ? <ul className="pub-points">{block.list.map(item => <li key={item}>{item}</li>)}</ul> : null}
+              </div>
+            ))}</div>
+            {pub.references?.length ? <>
+              <h3>Referências</h3>
+              <ol className="pub-refs">{pub.references.map(ref => <li key={ref.text}>{ref.text}{ref.url ? <> <a href={ref.url} {...external}>{ref.url}</a></> : null}</li>)}</ol>
+            </> : null}
+            <button type="button" className="btn btn-outline pub-fulltext-close" onClick={collapse}>Recolher <ChevronUp size={16} strokeWidth={1.5} /></button>
           </div>
         ) : null}
 
@@ -76,12 +85,11 @@ function Publicacoes() {
       <section className="pub-hero"><div className="container">
         <span className="section-label">Publicações</span>
         <h1 className="section-title">Textos e <em>pesquisas.</em></h1>
-        <p className="text-copy">Trabalhos publicados em revistas científicas, para ler aqui mesmo ou na revista.</p>
+        <p className="text-copy">Artigos, livros e capítulos publicados, para ler aqui mesmo ou na fonte original.</p>
       </div></section>
 
       <section className="pub-section"><div className="container">
-        <ol className="pub-list">{site.publications.map((pub, index) => <li key={pub.url}><PublicationCard pub={pub} index={index} /></li>)}</ol>
-        <p className="pub-note">Também sou autora de livro e capítulo sobre transtornos alimentares e tratamentos psicológicos com suporte empírico.</p>
+        <ol className="pub-list">{site.publications.map((pub, index) => <li key={pub.title}><PublicationCard pub={pub} index={index} /></li>)}</ol>
       </div></section>
     </main>
     <SiteFooter />
