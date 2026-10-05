@@ -239,3 +239,64 @@ html.reveal-ready .reveal:not(.is-visible) { opacity: 0; transform: translateY(3
 @media (max-width: 800px) { .container { width: calc(100% - 40px); } .section { padding-block: 80px; } .two-col, .contact-grid { grid-template-columns: 1fr; gap: 38px; } .reviews-head { flex-direction: column; align-items: flex-start; gap: 16px; } .reviews-masonry { columns: 1; } .sticky-intro { position: static; } .hero { min-height: 90svh; } .hero-inner { display: block; padding-top: 140px; padding-bottom: 45px; } .hero-info { margin-top: 50px; max-width: 420px; } .trust-grid { grid-template-columns: repeat(2, 1fr); } .about-grid { gap: 55px; } .portrait-wrap { width: min(100% - 18px, 460px); } .work-image { max-width: 480px; } .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 35px 0; } .step:nth-child(3) { border-left: 0; padding-left: 0; } .services-grid { grid-template-columns: 1fr 1fr; } .contact-grid > div + div { border-left: 0; border-top: 1px solid color-mix(in oklch, var(--paper) 28%, transparent); padding: 38px 0 0; } }
 @media (max-width: 600px) { .header-inner { min-height: 72px; } .menu-open .mobile-nav { padding-inline: 20px; } .hero { min-height: 0; } .hero-inner { padding-top: 152px; padding-bottom: 32px; } .hero::after { background: linear-gradient(90deg, color-mix(in oklch, var(--forest) 92%, transparent), color-mix(in oklch, var(--forest) 64%, transparent)); } .hero h1 { font-size: 40px; } .hero-description { font-size: 15px; } .hero-info { margin-top: 42px; max-width: none; } .trust-grid { gap: 15px; } .trust-item { font-size: 11px; align-items: flex-start; } .section-title { font-size: 40px; } .concern { grid-template-columns: 55px 1fr; gap: 10px; } .concern-number { font-size: 28px; } .concern h3 { font-size: 21px; } .portrait-caption { right: -8px; } .portrait-inset { right: -8px; } .pillars, .work-panels, .services-grid, .footer-grid { grid-template-columns: 1fr; } .pillars { margin-top: 50px; } .pillar, .pillar + .pillar { padding: 25px 0; border-left: 0; border-bottom: 1px solid var(--sand); } .work-panels { margin-top: 45px; } .work-panel { padding: 28px; } .steps-grid { gap: 30px 0; } .step { padding: 0 12px; } .step-number { font-size: 42px; } .step h3 { font-size: 20px; } .service { min-height: 0; } .service > p { min-height: 0; } .faq-item summary { font-size: 20px; } .footer-grid { gap: 26px; } .footer-bottom { display: block; } .footer-bottom p + p { margin-top: 15px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } html.reveal-ready .reveal:not(.is-visible) { opacity: 1; transform: none; } }
+/* ===== Rodapé: urgência, Serenitah e página de Publicações ===== */
+.footer { padding: 28px 0 16px; }
+.footer h3 { font-size: 20px; margin: 0 0 2px; }
+.footer-urgent { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 40px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid color-mix(in oklch, var(--paper) 22%, transparent); }
+.footer-urgent h3 { font: 300 22px/1.2 var(--font-display); margin: 0; white-space: nowrap; }
+.footer-urgent h3 em { color: var(--sage); font-style: italic; }
+.footer-urgent ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 24px; }
+.footer-urgent li { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: baseline; }
+.footer .urgent-number { font: 300 30px/1 var(--font-display); color: var(--paper); }
+.footer .urgent-number:hover { color: var(--sage); }
+.footer-urgent strong { font: 400 15px/1.2 var(--font-display); color: var(--sage); }
+.footer-urgent li p { grid-column: 1 / -1; font-size: 11px; line-height: 1.45; margin-top: 4px; }
+.footer-grid { grid-template-columns: 1fr 1.5fr 1fr; gap: 32px; }
+.footer-grid p, .footer-grid a { line-height: 1.6; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin-top: 20px; padding-top: 14px; border-top: 1px solid color-mix(in oklch, var(--paper) 22%, transparent); }
+.footer-bottom p { margin: 0; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 20px; border: 0; margin: 0; padding: 0; }
+.serenitah { background: var(--linen); }
+.serenitah-grid { align-items: center; }
+.serenitah-card { background: var(--forest); color: var(--paper); border-radius: 28px; padding: 44px 40px; }
+.serenitah-card h3 { font: 300 clamp(2.2rem, 4vw, 3rem)/1.1 var(--font-display); margin: 0 0 10px; }
+.serenitah-tag { display: block; color: var(--sage); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.serenitah-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding-top: 24px; border-top: 1px solid color-mix(in oklch, var(--paper) 24%, transparent); width: 100%; font-size: 14px; font-weight: 500; transition: gap .25s ease, color .25s ease; }
+.serenitah-link:hover { gap: 16px; color: var(--sage); }
+.pub-hero { padding: 168px 0 36px; }
+.pub-hero .section-title { margin-bottom: 22px; }
+.pub-section { padding-bottom: 110px; }
+.pub-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--sand); }
+.pub { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: clamp(28px, 5vw, 70px); padding: 52px 0; border-bottom: 1px solid var(--sand); }
+.pub-year { display: block; font: italic 300 54px/1 var(--font-display); color: var(--terracotta); }
+.pub-type { display: inline-block; margin-top: 14px; padding: 5px 12px; border: 1px solid var(--moss); border-radius: 999px; color: var(--forest); font-size: 11px; letter-spacing: .06em; }
+.pub-title { font: 400 clamp(1.7rem, 3.2vw, 2.4rem)/1.2 var(--font-display); margin: 0 0 16px; max-width: 720px; }
+.pub-authors { font-size: 14px; margin: 0 0 6px; max-width: 680px; }
+.pub-authors strong { font-weight: 600; color: var(--forest); }
+.pub-venue { color: var(--moss); font-size: 13px; margin: 0 0 22px; }
+.pub-summary { color: var(--moss); font-size: 15px; max-width: 660px; margin: 0 0 28px; }
+.pub-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+.pub-cite { max-width: 680px; border-top: 1px solid var(--sand); border-bottom: 0; }
+.pub-cite summary { min-height: 56px; font-size: 19px; }
+.pub-note { color: var(--moss); font-size: 14px; margin: 36px 0 0; max-width: 620px; }
+@media (max-width: 800px) { .footer-urgent { grid-template-columns: 1fr; gap: 14px; } .footer-urgent ul { grid-template-columns: 1fr 1fr; gap: 14px 20px; } .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; } .serenitah-card { padding: 34px 28px; } .pub-hero { padding-top: 140px; } .pub { grid-template-columns: 1fr; gap: 22px; padding: 40px 0; } .pub-meta { display: flex; align-items: center; gap: 16px; } .pub-type { margin-top: 0; } }
+@media (max-width: 600px) { .footer-urgent li p { display: none; } .footer-grid { grid-template-columns: 1fr; gap: 14px; } .pub-year { font-size: 44px; } .pub-actions .btn { width: 100%; } }
+
+/* Serenitah com foto (somente telas grandes) e rodapé centralizado no celular */
+.serenitah-photo { margin: 36px 0 0; }
+.serenitah-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 20px; box-shadow: 0 0 0 1px color-mix(in oklch, var(--paper) 16%, transparent), 0 14px 34px color-mix(in oklch, #000 22%, transparent); }
+@media (max-width: 800px) {
+  .serenitah-photo { margin-top: 26px; }
+  .serenitah-photo img { aspect-ratio: 4 / 3; object-position: 50% 55%; border-radius: 16px; }
+  .footer { text-align: center; }
+  .footer-urgent { justify-items: center; }
+  .footer-urgent ul { justify-items: center; }
+  .footer-urgent li { grid-template-columns: auto auto; justify-content: center; }
+  .footer-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 6px 18px; }
+  .footer-grid > div { display: contents; }
+  .footer-grid > div:first-child { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 8px; flex-basis: 100%; margin-bottom: 4px; }
+  .footer-grid > div:first-child h3 { flex-basis: 100%; }
+  .footer-grid > div:first-child p + p::before { content: "·"; margin-right: 8px; }
+  .footer-grid > div:nth-child(2) p { flex-basis: 100%; max-width: 420px; }
+  .footer-links, .footer-bottom { justify-content: center; }
+}

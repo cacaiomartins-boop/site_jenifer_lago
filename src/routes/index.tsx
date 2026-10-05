@@ -1,16 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, BadgeCheck, CalendarDays, Clock3, ExternalLink, MapPin, Menu, Monitor, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarDays, Clock3, ExternalLink, MapPin, Monitor, ShieldCheck } from "lucide-react";
 import { site } from "../config/site";
+import { SiteFooter, SiteHeader } from "../components/site-chrome";
 
-const links = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Como trabalho", href: "#como-trabalho" },
-  { label: "Atendimento", href: "#atendimento" },
-  { label: "Como funciona", href: "#como-funciona" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Dúvidas", href: "#duvidas" },
-];
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export const Route = createFileRoute("/")({
@@ -37,7 +30,6 @@ function Booking({ light = false, label = site.bookingLabel, className = "" }: {
 
 function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -60,15 +52,7 @@ function Home() {
   }, []);
 
   return <>
-    <header className={`site-header ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
-      <div className="container header-inner">
-        <a className="brand" href="#topo" onClick={() => setMenuOpen(false)} aria-label="Jennifer Lago, voltar ao início"><span className="brand-name">{site.name}</span><span className="brand-detail">{site.profession} · {site.registration}</span></a>
-        <nav className="desktop-nav" aria-label="Navegação principal">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-        <a href={site.profileUrl} {...external} className="btn header-cta">Agendar consulta <ArrowRight size={15} strokeWidth={1.5}/></a>
-        <button className="menu-toggle" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={24} strokeWidth={1.5}/> : <Menu size={24} strokeWidth={1.5}/>}</button>
-      </div>
-      <nav className="mobile-nav" aria-label="Navegação para celular">{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="btn btn-dark" href={site.profileUrl} {...external} onClick={() => setMenuOpen(false)}>Agendar consulta <ArrowRight size={16}/></a></nav>
-    </header>
+    <SiteHeader />
 
     <main>
       <section className="hero dark-section" id="topo">
@@ -122,21 +106,26 @@ function Home() {
         <div className="work-panels"><div className="work-panel work-panel-dark reveal"><h3>O que pode ganhar lugar</h3><ul><li><span>→</span>Dar nome ao que inquieta.</li><li><span>→</span>Olhar para o que se repete.</li><li><span>→</span>Reconhecer o próprio tempo.</li></ul></div><div className="work-panel reveal"><h3>O que este trabalho não é</h3><ul><li><span>·</span>Uma resposta igual para todos.</li><li><span>·</span>Uma promessa de resultado imediato.</li><li><span>·</span>Uma decisão tomada por você.</li></ul><p>O acompanhamento é construído em conversa e pode ser revisto ao longo do processo.</p></div></div>
       </div></section>
 
-      <section className="section steps dark-section" id="como-funciona"><div className="container"><span className="section-label reveal">04 — Como funciona</span><h2 className="section-title reveal">Do primeiro contato ao <em>acompanhamento.</em></h2><div className="steps-grid">{[
+      <section className="section serenitah" id="serenitah"><div className="container two-col serenitah-grid">
+        <div className="reveal"><span className="section-label">04 — Clínica</span><h2 className="section-title">Um espaço compartilhado com <em>minha irmã e outras profissionais.</em></h2><p className="text-copy">Divido com minha irmã a Serenitah, clínica que reúne profissionais da saúde mental e do cuidado em um mesmo espaço, com atendimento presencial e online.</p></div>
+        <div className="reveal"><aside className="serenitah-card" aria-label="Serenitah Terapias Integradas"><h3>Serenitah</h3><span className="serenitah-tag">Terapias integradas</span>{site.serenitahUrl ? <a className="serenitah-link" href={site.serenitahUrl} {...external}>Conhecer o site da Serenitah <ExternalLink size={14} strokeWidth={1.5}/></a> : null}<figure className="serenitah-photo"><img src="/assets/serenitah-equipe.jpg" alt="Profissionais da Serenitah sorrindo, sentadas em poltronas numa sala com mapa-múndi na parede" width="1600" height="1067" loading="lazy" /></figure></aside></div>
+      </div></section>
+
+      <section className="section steps dark-section" id="como-funciona"><div className="container"><span className="section-label reveal">05 — Como funciona</span><h2 className="section-title reveal">Do primeiro contato ao <em>acompanhamento.</em></h2><div className="steps-grid">{[
         ["01", "Primeiro contato", "Agende uma consulta pelo whatsapp ou escolha um horário disponível pelo perfil no Doctoralia."],
         ["02", "Horário e formato", "Confira a disponibilidade para atendimento presencial ou online."],
         ["03", "Primeira consulta", "Conversamos sobre o que motiva sua procura e a frequência das sessões."],
         ["04", "Acompanhamento", "O processo segue no seu tempo, com possibilidade de rever a frequência."],
       ].map(([number, title, text], index) => <div className="step reveal" style={{ transitionDelay: `${index * 110}ms` }} key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{text}</p></div>)}</div></div></section>
 
-      <section className="section" id="atendimento"><div className="container"><span className="section-label reveal">05 — Atendimento e valores</span><h2 className="section-title reveal">Formatos de <em>atendimento.</em></h2><p className="text-copy reveal">Atendimento particular, presencial em Brasília ou online. Pagamento por PIX ou transferência bancária, com possibilidade de reembolso.</p><div className="services-grid">{site.services.map((service, index) => <article className="service reveal" style={{ transitionDelay: `${index * 110}ms` }} key={service.name}><h3>{service.name}</h3><p>{service.description}</p><div className="service-detail"><Monitor size={16} strokeWidth={1.5}/>{service.mode}</div><div className="service-detail"><Clock3 size={16} strokeWidth={1.5}/>{service.duration}</div><div className="service-bottom"><strong>{service.price}</strong><a href={site.profileUrl} {...external} className="inline-link">Agendar <ArrowRight size={15}/></a></div></article>)}</div></div></section>
+      <section className="section" id="atendimento"><div className="container"><span className="section-label reveal">06 — Atendimento e valores</span><h2 className="section-title reveal">Formatos de <em>atendimento.</em></h2><p className="text-copy reveal">Atendimento particular, presencial em Brasília ou online. Pagamento por PIX ou transferência bancária, com possibilidade de reembolso.</p><div className="services-grid">{site.services.map((service, index) => <article className="service reveal" style={{ transitionDelay: `${index * 110}ms` }} key={service.name}><h3>{service.name}</h3><p>{service.description}</p><div className="service-detail"><Monitor size={16} strokeWidth={1.5}/>{service.mode}</div><div className="service-detail"><Clock3 size={16} strokeWidth={1.5}/>{service.duration}</div><div className="service-bottom"><strong>{service.price}</strong><a href={site.profileUrl} {...external} className="inline-link">Agendar <ArrowRight size={15}/></a></div></article>)}</div></div></section>
 
       <section className="section reviews" id="depoimentos"><div className="container">
-        <div className="reviews-head reveal"><div><span className="section-label">06 — Depoimentos</span><h2 className="section-title">O que dizem os <em>pacientes.</em></h2></div><div className="rating-inline"><strong className="rating-big">{site.rating}</strong><div className="rating-text"><p className="rating-note">de 5 · {site.reviewCount} avaliações no Doctoralia</p><a className="inline-link" href={site.reviewUrl} {...external}>Ver o perfil no Doctoralia <ArrowRight size={16}/></a></div></div></div>
+        <div className="reviews-head reveal"><div><span className="section-label">07 — Depoimentos</span><h2 className="section-title">O que dizem os <em>pacientes.</em></h2></div><div className="rating-inline"><strong className="rating-big">{site.rating}</strong><div className="rating-text"><p className="rating-note">de 5 · {site.reviewCount} avaliações no Doctoralia</p><a className="inline-link" href={site.reviewUrl} {...external}>Ver o perfil no Doctoralia <ArrowRight size={16}/></a></div></div></div>
         <div className="reviews-masonry">{site.reviews.map((review, index) => <article className={`review reveal review-${index + 1}`} style={{ transitionDelay: `${index * 110}ms` }} key={review.author}><div className="review-mark">“</div><blockquote>{review.quote}</blockquote><footer>{review.author} · avaliação verificada no Doctoralia</footer></article>)}</div>
       </div></section>
 
-      <section className="section" id="duvidas"><div className="container two-col faq-grid"><div className="sticky-intro reveal"><span className="section-label">07 — Dúvidas</span><h2 className="section-title">Perguntas <em>frequentes.</em></h2><a href={site.profileUrl} {...external} className="btn btn-outline">Perguntar pelo Doctoralia <ArrowRight size={16}/></a></div><div className="faq-list">{[
+      <section className="section" id="duvidas"><div className="container two-col faq-grid"><div className="sticky-intro reveal"><span className="section-label">08 — Dúvidas</span><h2 className="section-title">Perguntas <em>frequentes.</em></h2><a href={site.profileUrl} {...external} className="btn btn-outline">Perguntar pelo Doctoralia <ArrowRight size={16}/></a></div><div className="faq-list">{[
         ["Como é a primeira consulta?", "É um momento para conversar sobre o que motivou sua procura e combinar como será o acompanhamento."],
         ["Você atende online?", "Sim. O atendimento online é feito por teleconsulta, para quem mora em Brasília, em outra cidade ou no exterior."],
         ["Em quais idiomas você atende?", "Em português, inglês e espanhol."],
@@ -148,10 +137,10 @@ function Home() {
         ["Como posso começar?", "Você pode verificar os horários e agendar uma consulta pelo meu perfil no Doctoralia."],
       ].map(([question, answer], index) => <details className="faq-item reveal" style={{ transitionDelay: `${Math.min(index, 4) * 110}ms` }} key={question} open={index === 0 ? true : undefined}><summary>{question}<span className="faq-plus" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></div></section>
 
-      <section className="section contact dark-section" id="contato"><div className="container contact-grid"><div className="reveal"><span className="section-label">08 — Contato</span><h2 className="section-title">Comece por uma <em>conversa.</em></h2><p>Se quiser iniciar um atendimento, veja os horários disponíveis no meu perfil.</p><Booking light /></div><div className="reveal contact-side"><div className="contact-map-wrap"><iframe title="Mapa do consultório de Jennifer Lago em Brasília" className="contact-map" src="https://maps.google.com/maps?q=-15.7898359,-47.8852539&z=16&hl=pt-BR&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe><div className="contact-map-note"><MapPin size={16} strokeWidth={1.5}/><span>SHN, Edifício Fusion Work e Live — Brasília, DF</span><a className="contact-map-link" href={site.mapUrl} {...external}>Abrir no Google Maps <ExternalLink size={12} className="inline" /></a></div></div><a className="contact-address" href={site.mapUrl} {...external}>{site.address} ↗</a><div className="contact-online">Atendimento online disponível</div></div></div></section>
+      <section className="section contact dark-section" id="contato"><div className="container contact-grid"><div className="reveal"><span className="section-label">09 — Contato</span><h2 className="section-title">Comece por uma <em>conversa.</em></h2><p>Se quiser iniciar um atendimento, veja os horários disponíveis no meu perfil.</p><Booking light /></div><div className="reveal contact-side"><div className="contact-map-wrap"><iframe title="Mapa do consultório de Jennifer Lago em Brasília" className="contact-map" src="https://maps.google.com/maps?q=-15.7898359,-47.8852539&z=16&hl=pt-BR&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe><div className="contact-map-note"><MapPin size={16} strokeWidth={1.5}/><span>SHN, Edifício Fusion Work e Live — Brasília, DF</span><a className="contact-map-link" href={site.mapUrl} {...external}>Abrir no Google Maps <ExternalLink size={12} className="inline" /></a></div></div><a className="contact-address" href={site.mapUrl} {...external}>{site.address} ↗</a><div className="contact-online">Atendimento online disponível</div></div></div></section>
     </main>
 
-    <footer className="footer"><div className="container"><div className="footer-grid"><div><h3>{site.name}</h3><p>{site.profession}</p><p>{site.registration}</p></div><div><p>{site.address}</p><a href={site.mapUrl} {...external}>Ver no mapa ↗</a></div><div><a href={site.profileUrl} {...external}>Doctoralia ↗</a><a href={site.reviewUrl} {...external}>Avaliações ↗</a></div></div><nav className="footer-links" aria-label="Links do rodapé">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav><div className="footer-bottom"><p>© {new Date().getFullYear()} · {site.name} · {site.registration} · <em>Escuta em seu tempo.</em></p><p>Em caso de emergência, ligue 188 (CVV) ou 192 (SAMU).</p></div></div></footer>
+    <SiteFooter home />
     <a href={site.profileUrl} {...external} className={`floating-contact ${scrolled ? "visible" : ""}`} aria-label="Agendar consulta no Doctoralia" title="Agendar consulta no Doctoralia"><CalendarDays size={24} strokeWidth={1.5}/></a>
   </>;
 }

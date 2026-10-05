@@ -44,4 +44,27 @@ export const site = {
     { quote: "Profissional incrível, atenciosa e muito competente. Sempre me acolhe com empatia e me ajuda a ver as situações de forma mais leve.", author: "Vanessa Alves" },
     { quote: "Eu realmente me sinto muito à vontade, eu amei o trabalho dela e ela me ajudou a entender bastante coisa sobre minha vida.", author: "SG" },
   ],
+  // Link do site da Serenitah (provisório). O botão só aparece quando este campo estiver preenchido.
+  serenitahUrl: "https://pixel-perfect-replication-beryl-delta.vercel.app/",
+  emergency: [
+    { number: "193", name: "Bombeiros", text: "Resgate em situações de risco à vida, como tentativas de suicídio, acidentes e incêndios." },
+    { number: "190", name: "Polícia", text: "Quando alguém estiver violento, agressivo ou ameaçando outra pessoa." },
+    { number: "192", name: "SAMU", text: "Urgências e emergências de saúde, incluindo as psiquiátricas." },
+    { number: "188", name: "CVV", text: "Apoio emocional e prevenção do suicídio, 24 horas e gratuito." },
+  ],
+  publications: [
+    {
+      year: 2026,
+      type: "Editorial",
+      title: "Enfermeiros e o luto: uma análise sob a perspectiva da psicanálise",
+      authors: ["Diane Maria Scherer Kuhn Lago", "Jennifer Patrícia Kuhn Lago", "Ana Claudia Afonso Valladares-Torres", "Dirce Bellezi Guilhem"],
+      highlight: "Jennifer Patrícia Kuhn Lago",
+      venue: "Revista Brasileira de Enfermagem",
+      reference: "2026;79:e7904",
+      summary: "Editorial que discute o luto na perspectiva da psicanálise: o processo singular de elaborar uma perda, os sinais de que é hora de buscar ajuda profissional e a importância de preparar enfermeiros e outros profissionais de saúde para acolher pessoas enlutadas.",
+      url: "https://doi.org/10.1590/0034-7167.20267904pt",
+      pdf: "/publicacoes/enfermeiros-e-o-luto.pdf",
+      citation: "Lago DMSK, Lago JPK, Valladares-Torres ACA, Guilhem DB. Nurses and grief: an analysis from the perspective of psychoanalysis. Rev Bras Enferm. 2026;79:e7904. https://doi.org/10.1590/0034-7167.20267904pt",
+    },
+  ],
 } as const;
