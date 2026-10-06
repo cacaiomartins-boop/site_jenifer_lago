@@ -64,6 +64,7 @@ export function SiteFooter({ home = false }: { home?: boolean }) {
         <div><p>{site.address}</p><a href={site.mapUrl} {...external}>Ver no mapa ↗</a></div>
         <div><a href={site.profileUrl} {...external}>Doctoralia ↗</a><a href={site.reviewUrl} {...external}>Avaliações ↗</a>{site.serenitahUrl ? <a href={site.serenitahUrl} {...external}>Serenitah ↗</a> : null}</div>
       </div>
+      <div className="footer-social"><span>Acompanhe</span>{site.social.map(item => <a key={item.label} href={item.url} {...external}>{item.label} ↗</a>)}</div>
       <div className="footer-bottom"><nav className="footer-links" aria-label="Links do rodapé">{navLinks.map(item => <NavItem key={item.label} item={item} home={home} />)}</nav><p>© {new Date().getFullYear()} · {site.name} · {site.registration} · <em>Escuta em seu tempo.</em></p></div>
     </div></footer>
   );

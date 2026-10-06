@@ -186,5 +186,16 @@ export const site = {
     { number: "192", name: "SAMU", text: "Urgências e emergências de saúde, incluindo as psiquiátricas." },
     { number: "188", name: "CVV", text: "Apoio emocional e prevenção do suicídio, 24 horas e gratuito." },
   ],
+  podcast: {
+    name: "vamos pro divã?",
+    url: "https://open.spotify.com/show/6lV1VYO55jbOGj0DbMpDde",
+    image: "/assets/podcast-vamos-pro-diva.jpg",
+  },
+  social: [
+    { label: "Instagram", url: "https://www.instagram.com/jenniferlago.psi" },
+    { label: "TikTok", url: "https://www.tiktok.com/@jenniferlago.psicologa" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/jennifer-lago-629837200" },
+    { label: "Podcast", url: "https://open.spotify.com/show/6lV1VYO55jbOGj0DbMpDde" },
+  ],
   publications,
 } as const;
