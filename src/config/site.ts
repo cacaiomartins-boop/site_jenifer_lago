@@ -134,7 +134,7 @@ const publications: Publication[] = [
 ];
 
 export const site = {
-  name: "Jennifer Lago",
+  name: "Jennifer Priscila Lago",
   firstName: "Jennifer",
   profession: "Psicóloga · Psicanalista",
   registration: "CRP 01/26397",

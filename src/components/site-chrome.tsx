@@ -41,8 +41,8 @@ export function SiteHeader({ solid = false }: { solid?: boolean }) {
     <header className={`site-header ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
       <div className="container header-inner">
         {home
-          ? <a className="brand" href="#topo" onClick={close} aria-label="Jennifer Lago, voltar ao início">{brandContent}</a>
-          : <Link className="brand" to="/" onClick={close} aria-label="Jennifer Lago, voltar ao início">{brandContent}</Link>}
+          ? <a className="brand" href="#topo" onClick={close} aria-label="Jennifer Priscila Lago, voltar ao início">{brandContent}</a>
+          : <Link className="brand" to="/" onClick={close} aria-label="Jennifer Priscila Lago, voltar ao início">{brandContent}</Link>}
         <nav className="desktop-nav" aria-label="Navegação principal">{navLinks.map(item => <NavItem key={item.label} item={item} home={home} />)}</nav>
         <a href={site.profileUrl} {...external} className="btn header-cta">Agendar consulta <ArrowRight size={15} strokeWidth={1.5} /></a>
         <button className="menu-toggle" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}</button>
