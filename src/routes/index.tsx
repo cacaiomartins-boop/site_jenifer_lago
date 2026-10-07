@@ -9,10 +9,10 @@ const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Psicóloga em Brasília e Online | Jennifer Priscila Lago" },
-      { name: "description", content: "Jennifer Priscila Lago, psicóloga e psicanalista CRP 01/26397 em Brasília e online. Psicanálise, ansiedade, transtornos alimentares e relacionamentos." },
-      { property: "og:title", content: "Psicóloga em Brasília e Online | Jennifer Priscila Lago" },
-      { property: "og:description", content: "Psicoterapia e psicanálise com Jennifer Priscila Lago, CRP 01/26397. Atendimento presencial em Brasília e online." },
+      { title: "Psicóloga em Brasília e Online | Jennifer Patrícia Kuhn Lago" },
+      { name: "description", content: "Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista CRP 01/26397 em Brasília e online. Psicanálise, ansiedade, transtornos alimentares e relacionamentos." },
+      { property: "og:title", content: "Psicóloga em Brasília e Online | Jennifer Patrícia Kuhn Lago" },
+      { property: "og:description", content: "Psicoterapia e psicanálise com Jennifer Patrícia Kuhn Lago, CRP 01/26397. Atendimento presencial em Brasília e online." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -56,7 +56,7 @@ function Home() {
 
     <main>
       <section className="hero dark-section" id="topo">
-        <img className="hero-image" src={site.office} alt="Consultório de Jennifer Priscila Lago em Brasília, com poltronas e ampla janela" fetchPriority="high" />
+        <img className="hero-image" src={site.office} alt="Consultório de Jennifer Patrícia Kuhn Lago em Brasília, com poltronas e ampla janela" fetchPriority="high" />
         <div className="container hero-inner">
           <div className="hero-copy">
             <span className="hero-kicker">Psicóloga e psicanalista em Brasília · Online</span>
@@ -86,7 +86,7 @@ function Home() {
       </div></section>
 
       <section className="section about" id="sobre"><div className="container two-col about-grid">
-        <div className="portrait-wrap reveal"><img className="portrait" loading="lazy" src={site.portrait} alt="Retrato de Jennifer Priscila Lago sentada no consultório"/><img className="portrait-inset" loading="lazy" src={site.reading} alt="Jennifer Priscila Lago sorrindo com um livro de Freud"/><div className="portrait-caption"><strong>{site.name}</strong><span>{site.profession}</span></div></div>
+        <div className="portrait-wrap reveal"><img className="portrait" loading="lazy" src={site.portrait} alt="Retrato de Jennifer Patrícia Kuhn Lago sentada no consultório"/><img className="portrait-inset" loading="lazy" src={site.reading} alt="Jennifer Patrícia Kuhn Lago sorrindo com um livro de Freud"/><div className="portrait-caption"><strong>{site.name}</strong><span>{site.profession}</span></div></div>
         <div className="about-content reveal"><span className="section-label">02 — Sobre</span><h2 className="section-title">Sou <em>Jennifer.</em></h2>
           <p>Sou psicóloga e psicanalista. Atendo em consultório particular em Brasília e também online.</p>
           <p>Sou formada em Psicologia pelo UniCEUB, fiz a formação em Psicanálise no Corpo Freudiano de Brasília e concluí o Master em Psicologia.</p>
@@ -142,7 +142,7 @@ function Home() {
         ["Como posso começar?", "Você pode verificar os horários e agendar uma consulta pelo meu perfil no Doctoralia."],
       ].map(([question, answer], index) => <details className="faq-item reveal" style={{ transitionDelay: `${Math.min(index, 4) * 110}ms` }} key={question} open={index === 0 ? true : undefined}><summary>{question}<span className="faq-plus" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></div></section>
 
-      <section className="section contact dark-section" id="contato"><div className="container contact-grid"><div className="reveal"><span className="section-label">10 — Contato</span><h2 className="section-title">Comece por uma <em>conversa.</em></h2><p>Se quiser iniciar um atendimento, veja os horários disponíveis no meu perfil.</p><Booking light /></div><div className="reveal contact-side"><div className="contact-map-wrap"><iframe title="Mapa do consultório de Jennifer Priscila Lago em Brasília" className="contact-map" src="https://maps.google.com/maps?q=-15.7898359,-47.8852539&z=16&hl=pt-BR&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe><div className="contact-map-note"><MapPin size={16} strokeWidth={1.5}/><span>SHN, Edifício Fusion Work e Live — Brasília, DF</span><a className="contact-map-link" href={site.mapUrl} {...external}>Abrir no Google Maps <ExternalLink size={12} className="inline" /></a></div></div><a className="contact-address" href={site.mapUrl} {...external}>{site.address} ↗</a><div className="contact-online">Atendimento online disponível</div></div></div></section>
+      <section className="section contact dark-section" id="contato"><div className="container contact-grid"><div className="reveal"><span className="section-label">10 — Contato</span><h2 className="section-title">Comece por uma <em>conversa.</em></h2><p>Se quiser iniciar um atendimento, veja os horários disponíveis no meu perfil.</p><Booking light /></div><div className="reveal contact-side"><div className="contact-map-wrap"><iframe title="Mapa do consultório de Jennifer Patrícia Kuhn Lago em Brasília" className="contact-map" src="https://maps.google.com/maps?q=-15.7898359,-47.8852539&z=16&hl=pt-BR&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe><div className="contact-map-note"><MapPin size={16} strokeWidth={1.5}/><span>SHN, Edifício Fusion Work e Live — Brasília, DF</span><a className="contact-map-link" href={site.mapUrl} {...external}>Abrir no Google Maps <ExternalLink size={12} className="inline" /></a></div></div><a className="contact-address" href={site.mapUrl} {...external}>{site.address} ↗</a><div className="contact-online">Atendimento online disponível</div></div></div></section>
     </main>
 
     <SiteFooter home />

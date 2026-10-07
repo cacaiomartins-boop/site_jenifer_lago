@@ -9,10 +9,10 @@ const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 export const Route = createFileRoute("/publicacoes")({
   head: () => ({
     meta: [
-      { title: "Publicações | Jennifer Priscila Lago, psicóloga e psicanalista" },
-      { name: "description", content: "Artigos, livros e capítulos de Jennifer Priscila Lago, psicóloga e psicanalista em Brasília. Luto, transtornos alimentares, preconceito e psicanálise." },
-      { property: "og:title", content: "Publicações | Jennifer Priscila Lago" },
-      { property: "og:description", content: "Artigos, livros e capítulos de Jennifer Priscila Lago, psicóloga e psicanalista CRP 01/26397." },
+      { title: "Publicações | Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista" },
+      { name: "description", content: "Artigos, livros e capítulos de Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista em Brasília. Luto, transtornos alimentares, preconceito e psicanálise." },
+      { property: "og:title", content: "Publicações | Jennifer Patrícia Kuhn Lago" },
+      { property: "og:description", content: "Artigos, livros e capítulos de Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista CRP 01/26397." },
       { property: "og:type", content: "website" },
     ],
   }),
