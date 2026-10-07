@@ -3,18 +3,32 @@ import { useRef, useState } from "react";
 import { BookOpen, ChevronUp, Download, ExternalLink } from "lucide-react";
 import { site, type Publication } from "../config/site";
 import { SiteFooter, SiteHeader } from "../components/site-chrome";
+import { pageHead } from "../lib/seo";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
+const pubSeo = pageHead({
+  title: "Publicações | Jennifer Patrícia Kuhn Lago, psicóloga",
+  description: "Artigos, livros e capítulos de Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista em Brasília, sobre luto, transtornos alimentares e preconceito.",
+  path: "/publicacoes",
+});
+
+const pubStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "CollectionPage", "@id": `${site.url}/publicacoes#pagina`, url: `${site.url}/publicacoes`, name: "Publicações", inLanguage: "pt-BR", isPartOf: { "@id": `${site.url}/#website` }, about: { "@id": `${site.url}/#pessoa` } },
+    { "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Início", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Publicações", item: `${site.url}/publicacoes` },
+    ] },
+  ],
+};
+
 export const Route = createFileRoute("/publicacoes")({
   head: () => ({
-    meta: [
-      { title: "Publicações | Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista" },
-      { name: "description", content: "Artigos, livros e capítulos de Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista em Brasília. Luto, transtornos alimentares, preconceito e psicanálise." },
-      { property: "og:title", content: "Publicações | Jennifer Patrícia Kuhn Lago" },
-      { property: "og:description", content: "Artigos, livros e capítulos de Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista CRP 01/26397." },
-      { property: "og:type", content: "website" },
-    ],
+    meta: pubSeo.meta,
+    links: pubSeo.links,
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(pubStructuredData) }],
   }),
   component: Publicacoes,
 });
@@ -81,7 +95,7 @@ function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
 function Publicacoes() {
   return <>
     <SiteHeader solid />
-    <main>
+    <main id="conteudo">
       <section className="pub-hero"><div className="container">
         <span className="section-label">Publicações</span>
         <h1 className="section-title">Textos e <em>pesquisas.</em></h1>

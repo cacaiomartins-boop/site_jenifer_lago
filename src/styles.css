@@ -340,3 +340,7 @@ html.reveal-ready .reveal:not(.is-visible) { opacity: 0; transform: translateY(3
 .footer .footer-social a { display: inline; }
 @media (min-width: 801px) { .podcast-media { order: -1; } .podcast-grid > div:last-child { order: -1; } }
 @media (max-width: 800px) { .podcast-media { box-shadow: 10px 10px 0 color-mix(in oklch, var(--sage) 70%, var(--paper)); margin-right: 10px; width: calc(100% - 10px); } .footer-social { justify-content: center; } }
+
+/* Acessibilidade: link "pular para o conteúdo" (visível só com o foco do teclado) */
+.skip-link { position: absolute; left: 12px; top: -64px; z-index: 200; padding: 12px 18px; border-radius: 999px; background: var(--forest); color: var(--paper); font-size: 14px; font-weight: 600; transition: top .2s ease; }
+.skip-link:focus { top: 12px; }

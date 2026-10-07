@@ -3,23 +3,43 @@ import { useEffect, useState } from "react";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, ExternalLink, MapPin, Monitor, ShieldCheck } from "lucide-react";
 import { site } from "../config/site";
 import { SiteFooter, SiteHeader } from "../components/site-chrome";
+import { pageHead } from "../lib/seo";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
+const homeSeo = pageHead({
+  title: "Psicóloga em Brasília e Online | Jennifer Patrícia Kuhn Lago",
+  description: "Psicóloga e psicanalista em Brasília e online (CRP 01/26397). Psicanálise para ansiedade, transtornos alimentares e relacionamentos. Agende sua consulta.",
+  path: "/",
+});
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "@id": `${site.url}/#website`, url: `${site.url}/`, name: site.name, inLanguage: "pt-BR", publisher: { "@id": `${site.url}/#pessoa` } },
+    {
+      "@type": "Person", "@id": `${site.url}/#pessoa`, name: site.name, jobTitle: "Psicóloga e Psicanalista", identifier: site.registration,
+      url: `${site.url}/`, image: `${site.url}${site.portrait}`, knowsAbout: site.specialties,
+      sameAs: [...site.social.map(item => item.url), site.profileUrl], worksFor: { "@id": `${site.url}/#consultorio` },
+    },
+    {
+      "@type": "MedicalBusiness", "@id": `${site.url}/#consultorio`, name: site.name, description: "Psicologia e psicanálise, presencial em Brasília e online",
+      url: `${site.url}/`, image: `${site.url}${site.ogImage}`, areaServed: "Brasília, DF",
+      address: { "@type": "PostalAddress", streetAddress: "SHN, Quadra 1, Bloco D, Sala 1107, Conjunto A, 11º andar, Edifício Fusion Work e Live", addressLocality: "Brasília", addressRegion: "DF", postalCode: "70701-040", addressCountry: "BR" },
+      geo: { "@type": "GeoCoordinates", latitude: -15.7898359, longitude: -47.8852539 },
+    },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "Psicóloga em Brasília e Online | Jennifer Patrícia Kuhn Lago" },
-      { name: "description", content: "Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista CRP 01/26397 em Brasília e online. Psicanálise, ansiedade, transtornos alimentares e relacionamentos." },
-      { property: "og:title", content: "Psicóloga em Brasília e Online | Jennifer Patrícia Kuhn Lago" },
-      { property: "og:description", content: "Psicoterapia e psicanálise com Jennifer Patrícia Kuhn Lago, CRP 01/26397. Atendimento presencial em Brasília e online." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+    meta: homeSeo.meta,
+    links: [
+      ...homeSeo.links,
+      // Imagem principal (LCP) carregada com prioridade
+      { rel: "preload", as: "image", href: site.office, type: "image/webp", fetchPriority: "high" } as const,
     ],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@graph": [
-      { "@type": "Person", name: site.name, jobTitle: "Psicóloga e Psicanalista", identifier: site.registration, url: site.profileUrl, sameAs: site.social.map(item => item.url) },
-      { "@type": "MedicalBusiness", name: site.name, description: "Psicologia e psicanálise", url: site.profileUrl, address: { "@type": "PostalAddress", streetAddress: "SHN, Quadra 1, Bloco D, Sala 1107, Conjunto A, 11º andar, Edifício Fusion Work e Live", addressLocality: "Brasília", addressRegion: "DF", postalCode: "70701-040", addressCountry: "BR" } }
-    ] }) }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
   }),
   component: Home,
 });
@@ -54,7 +74,7 @@ function Home() {
   return <>
     <SiteHeader />
 
-    <main>
+    <main id="conteudo">
       <section className="hero dark-section" id="topo">
         <img className="hero-image" src={site.office} alt="Consultório de Jennifer Patrícia Kuhn Lago em Brasília, com poltronas e ampla janela" fetchPriority="high" />
         <div className="container hero-inner">
@@ -108,7 +128,7 @@ function Home() {
 
       <section className="section serenitah" id="serenitah"><div className="container two-col serenitah-grid">
         <div className="reveal"><span className="section-label">04 — Clínica</span><h2 className="section-title">Um espaço compartilhado com <em>minha irmã e outras profissionais.</em></h2><p className="text-copy">Divido com minha irmã a Serenitah, clínica que reúne profissionais da saúde mental e do cuidado em um mesmo espaço, com atendimento presencial e online.</p></div>
-        <div className="reveal"><aside className="serenitah-card" aria-label="Serenitah Terapias Integradas"><h3>Serenitah</h3><span className="serenitah-tag">Terapias integradas</span>{site.serenitahUrl ? <a className="serenitah-link" href={site.serenitahUrl} {...external}>Conhecer o site da Serenitah <ExternalLink size={14} strokeWidth={1.5}/></a> : null}<figure className="serenitah-photo"><img src="/assets/serenitah-equipe.jpg" alt="Profissionais da Serenitah sorrindo, sentadas em poltronas numa sala com mapa-múndi na parede" width="1600" height="1067" loading="lazy" /></figure></aside></div>
+        <div className="reveal"><aside className="serenitah-card" aria-label="Serenitah Terapias Integradas"><h3>Serenitah</h3><span className="serenitah-tag">Terapias integradas</span>{site.serenitahUrl ? <a className="serenitah-link" href={site.serenitahUrl} {...external}>Conhecer o site da Serenitah <ExternalLink size={14} strokeWidth={1.5}/></a> : null}<figure className="serenitah-photo"><img src="/assets/serenitah-equipe.webp" alt="Profissionais da Serenitah sorrindo, sentadas em poltronas numa sala com mapa-múndi na parede" width="1600" height="1067" loading="lazy" /></figure></aside></div>
       </div></section>
 
       <section className="section steps dark-section" id="como-funciona"><div className="container"><span className="section-label reveal">05 — Como funciona</span><h2 className="section-title reveal">Do primeiro contato ao <em>acompanhamento.</em></h2><div className="steps-grid">{[

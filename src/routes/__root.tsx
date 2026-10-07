@@ -11,64 +11,53 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SiteFooter, SiteHeader } from "../components/site-chrome";
+import { site } from "../config/site";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
+    <>
+      <title>Página não encontrada | Jennifer Patrícia Kuhn Lago</title>
+      <meta name="robots" content="noindex" />
+      <SiteHeader solid />
+      <main id="conteudo">
+        <section className="pub-hero">
+          <div className="container">
+            <span className="section-label">Erro 404</span>
+            <h1 className="section-title">Página não <em>encontrada.</em></h1>
+            <p className="text-copy">O endereço que você acessou não existe ou foi alterado. Você pode voltar ao início ou conhecer as publicações.</p>
+            <p style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
+              <Link to="/" className="btn btn-dark">Voltar ao início</Link>
+              <Link to="/publicacoes" className="btn btn-outline">Ver publicações</Link>
+            </p>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
+    <main id="conteudo">
+      <section className="pub-hero">
+        <div className="container">
+          <span className="section-label">Algo deu errado</span>
+          <h1 className="section-title">Esta página não <em>carregou.</em></h1>
+          <p className="text-copy">Ocorreu um problema do nosso lado. Tente atualizar a página ou volte ao início.</p>
+          <p style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
+            <button type="button" className="btn btn-dark" onClick={() => { router.invalidate(); reset(); }}>Tentar novamente</button>
+            <a href="/" className="btn btn-outline">Voltar ao início</a>
+          </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
@@ -77,22 +66,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      
-      
-      
-      
-      
+      { name: "google-site-verification", content: "qs22OauP6Z1ZVyxiY_4S4LXUHtMptooVRmPTKlYo9VU" },
+      { name: "theme-color", content: "#30506c" },
+      { name: "author", content: site.name },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: site.name },
+      { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
-      
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-      { rel: "apple-touch-icon", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=DM+Sans:wght@400;500;600&display=swap" },
@@ -111,6 +99,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
         {children}
         <Scripts />
       </body>

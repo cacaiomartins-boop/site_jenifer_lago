@@ -134,6 +134,8 @@ const publications: Publication[] = [
 ];
 
 export const site = {
+  url: "https://www.jenniferlago.com",
+  ogImage: "/assets/og-jennifer-lago.jpg",
   name: "Jennifer Patrícia Kuhn Lago",
   firstName: "Jennifer",
   profession: "Psicóloga · Psicanalista",
@@ -149,9 +151,9 @@ export const site = {
   price: "R$ 180",
   rating: "5,0",
   reviewCount: 19,
-  portrait: "/assets/jennifer-lago-retrato.jpg",
-  office: "/assets/consultorio-jennifer-lago.jpg",
-  reading: "/assets/jennifer-lago-freud.jpg",
+  portrait: "/assets/jennifer-lago-retrato.webp",
+  office: "/assets/consultorio-jennifer-lago.webp",
+  reading: "/assets/jennifer-lago-freud.webp",
   education: [
     "Graduação em Psicologia pelo UniCEUB (2022)",
     "Formação básica em Psicanálise pelo Corpo Freudiano de Brasília (2024)",
@@ -179,7 +181,7 @@ export const site = {
     { quote: "Eu realmente me sinto muito à vontade, eu amei o trabalho dela e ela me ajudou a entender bastante coisa sobre minha vida.", author: "SG" },
   ],
   // Link do site da Serenitah (provisório). O botão só aparece quando este campo estiver preenchido.
-  serenitahUrl: "https://pixel-perfect-replication-beryl-delta.vercel.app/",
+  serenitahUrl: "https://www.serenitah.com",
   emergency: [
     { number: "193", name: "Bombeiros", text: "Resgate em situações de risco à vida, como tentativas de suicídio, acidentes e incêndios." },
     { number: "190", name: "Polícia", text: "Quando alguém estiver violento, agressivo ou ameaçando outra pessoa." },
@@ -189,7 +191,7 @@ export const site = {
   podcast: {
     name: "vamos pro divã?",
     url: "https://open.spotify.com/show/6lV1VYO55jbOGj0DbMpDde",
-    image: "/assets/podcast-vamos-pro-diva.jpg",
+    image: "/assets/podcast-vamos-pro-diva.webp",
   },
   social: [
     { label: "Instagram", url: "https://www.instagram.com/jenniferlago.psi" },

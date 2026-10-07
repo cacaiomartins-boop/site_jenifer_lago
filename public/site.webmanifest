@@ -1,0 +1,13 @@
+{
+  "name": "Jennifer Patrícia Kuhn Lago, psicóloga e psicanalista",
+  "short_name": "Jennifer Lago",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f4f8fc",
+  "theme_color": "#30506c",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
